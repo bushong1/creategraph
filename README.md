@@ -1,8 +1,8 @@
 ## Prerequisites
 
-* Ruby
-* graph gem: `gem install graph`
-* graphviz application: `apt-get install graphviz`
+* Step 1: Install Ruby
+* Step 2: Install graph gem: `gem install graph`
+* Step 3: Install graphviz: `sudo apt-get install graphviz` OR `brew install graphviz`
 
 ## Usage
 
