@@ -1,8 +1,8 @@
 ## Prerequisites
 
-Ruby
-graph gem: `gem install graph`
-graphviz application: `apt-get install graphviz`
+* Ruby
+* graph gem: `gem install graph`
+* graphviz application: `apt-get install graphviz`
 
 ## Usage
 
@@ -24,3 +24,8 @@ graphviz application: `apt-get install graphviz`
 1.3.2|Code 'the other'
 1.3.3|Get user feedback on 'the other'
 ```
+
+## Documentation
+
+* Ruby Graph: http://rubydoc.info/gems/graph/2.7.0/frames
+* GraphViz: http://www.graphviz.org/Documentation.php
