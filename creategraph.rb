@@ -25,17 +25,6 @@ digraph do
   end
   orient "LR"
   node_attribs << box
-  #edge "C/C++", "Java"
-  #edge "Java", "Groovy"
-  #edge "Java", "Clojure"
-  #edge "Java", "JRuby"
-#
-#  edge "C/C++", "Perl"
-#  edge "Perl", "PHP"
-#  edge "Perl", "Ruby"
-##  edge "Ruby", "Rubinius"
-#  edge "Ruby", "MacRuby"
-#  edge "Ruby", "JRuby"
 
   save 'languages', 'png'
 end
