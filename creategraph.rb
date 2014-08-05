@@ -26,5 +26,5 @@ digraph do
   orient "LR"
   node_attribs << box
 
-  save 'languages', 'png'
+  save ARGV[0], 'png'
 end
