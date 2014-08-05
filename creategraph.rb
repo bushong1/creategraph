@@ -7,11 +7,21 @@ unless ARGV[0]
 end
 nodenames = {};
 digraph do
-  test = font "Helvetica-Bold"
-  node_attribs << test
-  test = fontsize "8"
-  node_attribs << test
-  color "blue"
+  
+  # Set the font name and size.  Details here:  http://www.graphviz.org/doc/fontfaq.txt
+  the_font = font "Helvetica-Bold"
+  the_fontsize = fontsize "12"
+  # set box color
+  the_color = color "blueviolet"
+  node_attribs << the_fontsize << the_font << the_color
+
+  # Orientation.  Defaults "TB" (top to bottom), alternate "LR" (left to right)
+  orient "LR"
+  
+  # Set node shape
+  node_attribs << box
+
+  # Read file
   f = File.open(ARGV[0], "r")
   f.each_line do |line|
     line = line.split("|")
@@ -23,8 +33,6 @@ digraph do
       edge nodenames[base], nodenames[current]
     end
   end
-  orient "LR"
-  node_attribs << box
 
   save ARGV[0], 'png'
 end
