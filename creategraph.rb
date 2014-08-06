@@ -16,8 +16,13 @@ end
 nodenames = {}
 
 
-#Set the margin of a node.  Default is "1", whatever that means.
+#Set the margin of a node.  Default is "1", whatever that means. .5 is good for a non-fixed size.
 margin = "0.05"
+#Set height.  A good height for fixedsize=true is ".3", a good height for not is ".05"
+height = ".3"
+#Set width, only use if using fixedsize=true.  2.4 is good for a character limit of 30
+width = "2.4"
+fixedsize = true
 
 weight = 0
 digraph do
@@ -27,7 +32,11 @@ digraph do
   the_fontsize = fontsize "10"
   # set box color
   the_color = color "blueviolet"
-  node_attribs << the_fontsize << the_font << the_color << "margin=#{margin}" << "height=#{margin}"
+  node_attribs << the_fontsize << the_font << the_color
+  node_attribs << "height=#{height}" if defined? height
+  node_attribs << "width=#{width}" if defined? width
+  node_attribs << "fixedsize=#{fixedsize}" if defined? fixedsize
+  node_attribs << "margin=#{margin}" if defined? margin
 
   # Orientation.  Defaults "TB" (top to bottom), alternate "LR" (left to right)
   orient "LR"
