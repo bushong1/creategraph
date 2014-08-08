@@ -64,24 +64,33 @@ digraph do
   f = File.open(ARGV[0], "r")
   f.each_line do |line|
     line = line.split("|")
-    current =  line[0]
-    base =  line[0].gsub(/\.[^.]+$/,"");
-    base = base.to_s
+    if(line[1].strip.length > 0)
+      current =  line[0]
+      base =  line[0].gsub(/\.[^.]+$/,"");
+      base = base.to_s
 
-    # Contents of each node
-    nodenames[current] = truncate("#{current} #{line[1].strip}")
-    ## For two lines...
-    # nodenames[current] = truncate("#{current} #{line[1].strip}") + "\n" + truncate("#{line[2].strip}")
+      # Contents of each node
+      if current.count('.') < 2
+        nodenames[current] = truncate("#{current} #{line[1].strip}")
+      else 
+        nodenames[current] = "#{current} #{line[1].strip}"
+      end
+      ## For two lines...
+      # nodenames[current] = truncate("#{current} #{line[1].strip}") + "\n" + truncate("#{line[2].strip}")
 
-    # These two lines create a "node" object, then assign a label.  The \\l will left justify things, \\r for right, take it off for center
-    curr_node = node nodenames[current];
-    curr_node.label(nodenames[current]+"\\l");
+      # These two lines create a "node" object, then assign a label.  The \\l will left justify things, \\r for right, take it off for center
+      curr_node = node nodenames[current];
+      curr_node.label(nodenames[current]+"\\l");
+      if current.count('.') >= 2
+        curr_node.attributes << "width=8" #<< "height=0" << "fixedsize=false"
+      end
 
-    if current != base
-      curr_edge = edge nodenames[base], nodenames[current]
+      if current != base
+        curr_edge = edge nodenames[base], nodenames[current]
+      end
     end
   end
 
-  save ARGV[0], 'png'
+  save ARGV[0], 'svg'
 end
 
