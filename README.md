@@ -8,6 +8,11 @@
 
 `./creategraph.rb <data file, pipe separated>`
 
+## Spreading out the tree
+
+Allow 3 deep spreading out (l3) and concentrate some nodes
+`unflatten -l3 sample.csv.dot | dot -Tpng -osample.csv.png -Gconcentrate=true`
+
 ## Data file example
 
 ```

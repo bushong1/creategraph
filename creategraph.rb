@@ -32,6 +32,8 @@ digraph do
   the_fontsize = fontsize "10"
   # set box color
   the_color = color "blueviolet"
+  graph_attribs << "splines=polyline" << "ranksep=0.5" << "k=0.1"
+  edge_attribs << "sametail=true" << "samehead=true" << 'headport="w"' << 'tailport="e"'
   node_attribs << the_fontsize << the_font << the_color
   node_attribs << "height=#{height}" if defined? height
   node_attribs << "width=#{width}" if defined? width
@@ -53,6 +55,7 @@ digraph do
     base = base.to_s
 
     # Contents of each node
+    puts line.inspect
     nodenames[current] = truncate("#{current} #{line[1].strip}") 
     ## For two lines...
     # nodenames[current] = truncate("#{current} #{line[1].strip}") + "\n" + truncate("#{line[2].strip}")
