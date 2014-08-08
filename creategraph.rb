@@ -3,6 +3,7 @@ require 'graph'
 
 def truncate(the_string)
   #Set the maximum amount of characters to appear in a node
+  # #LEVEL: node_character_limit = 22
   node_character_limit = 30
   return the_string unless the_string.length > node_character_limit
   return the_string[0..node_character_limit] + "..."
@@ -15,25 +16,38 @@ end
 
 nodenames = {}
 
-
 #Set the margin of a node.  Default is "1", whatever that means. .5 is good for a non-fixed size.
 margin = "0.05"
 #Set height.  A good height for fixedsize=true is ".3", a good height for not is ".05"
 height = ".3"
 #Set width, only use if using fixedsize=true.  2.4 is good for a character limit of 30
-width = "2.4"
+# #LEVEL: width = "3.25"
+width = "4.5"
+#Set distance between node rows.
+nodesep = "0.05"
+#Set distance between tiers
+ranksep = "0.3"
+
+#Force boxes to all be the same size
 fixedsize = true
 
-weight = 0
 digraph do
-  
+
   # Set the font name and size.  Details here:  http://www.graphviz.org/doc/fontfaq.txt
-  the_font = font "Times-Roman"
-  the_fontsize = fontsize "10"
+  # Set font for non-ubuntu
+  #the_font = font "Times-Roman"
+  # Set font for ubuntu, smh...
+  the_font = font "Times New Roman,"
+
+  # Set the font size, since we're scaling to 6.5" width, we had to increase the font size.  Will give us more pixels anyway, so it's a good thing
+  the_fontsize = fontsize "22"
   # set box color
   the_color = color "blueviolet"
-  graph_attribs << "splines=polyline" << "ranksep=0.5" << "k=0.1"
-  edge_attribs << "sametail=true" << "samehead=true" << 'headport="w"' << 'tailport="e"'
+
+  graph_attribs << "splines=polyline" << 'labeljust="l"' << "nojustify=true"
+  graph_attribs << "ranksep=#{ranksep}" if defined? ranksep
+  graph_attribs << "nodesep=#{nodesep}" if defined? nodesep
+  edge_attribs << 'headport="w"' << 'tailport="e"'
   node_attribs << the_fontsize << the_font << the_color
   node_attribs << "height=#{height}" if defined? height
   node_attribs << "width=#{width}" if defined? width
@@ -55,10 +69,13 @@ digraph do
     base = base.to_s
 
     # Contents of each node
-    puts line.inspect
-    nodenames[current] = truncate("#{current} #{line[1].strip}") 
+    nodenames[current] = truncate("#{current} #{line[1].strip}")
     ## For two lines...
     # nodenames[current] = truncate("#{current} #{line[1].strip}") + "\n" + truncate("#{line[2].strip}")
+
+    # These two lines create a "node" object, then assign a label.  The \\l will left justify things, \\r for right, take it off for center
+    curr_node = node nodenames[current];
+    curr_node.label(nodenames[current]+"\\l");
 
     if current != base
       curr_edge = edge nodenames[base], nodenames[current]
