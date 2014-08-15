@@ -1,3 +1,5 @@
+This project will assist in creating a graph.  Right now, it's tuned for horizontal tree and 3 rows wide.
+
 ## Prerequisites
 
 * Step 1: Install Ruby
